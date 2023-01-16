@@ -1,0 +1,36 @@
+<h2>Add a meal here</h2>
+
+<form (ngSubmit)="onSubmit()" #fref="ngForm">
+
+    <h3>Name</h3>
+    <input type="text"
+    placeholder="meal name"
+    #name
+    >
+
+    <h3>Ingredients</h3>
+    <button
+    (click)="onIngredientsAdd()"
+    type="button">Add</button>
+
+    <input type="text"
+    placeholder="Ingredients"
+    #ingredient>
+
+    <ul>
+        <li *ngFor="let item of ingredients_array">{{item}}</li>
+    </ul>
+
+    <h3>Apparatus</h3>
+    <button type="button"
+    (click)="onApparatusAdd()">Add</button>
+    <input 
+    type="text"
+    placeholder="Apparatus"
+    #apparatus>
+    <ul>
+        <li *ngFor="let item of apparatus_array">{{item}}</li>
+    </ul>
+<br>
+    <button type="submit">Submit</button>
+</form>
