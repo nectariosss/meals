@@ -44,12 +44,6 @@ meals = [
         apparatus: ["plate","knife"],
         description: ""
     },
-    {
-        name: "Sandwitch",
-        ingredients: ["bread","turkey ham","butter","lettuce","cheese","mayonnaise"],
-        apparatus: ["plate","knife"],
-        description: ""
-    }
 ]
 
 // Sides

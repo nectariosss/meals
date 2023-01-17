@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InputFormComponent } from './input-form/input-form.component';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { DisplayComponent } from './display/display.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    InputFormComponent
+    InputFormComponent,
+    DisplayComponent
   ],
   imports: [
     BrowserModule,

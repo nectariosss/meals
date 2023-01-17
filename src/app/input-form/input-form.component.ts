@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MealServices } from '../meals.services';
 
@@ -7,7 +7,7 @@ import { MealServices } from '../meals.services';
   templateUrl: './input-form.component.html',
   styleUrls: ['./input-form.component.scss']
 })
-export class InputFormComponent {
+export class InputFormComponent implements OnInit {
 
   @ViewChild('formref') form: NgForm
   @ViewChild('ingredient') ingredient:ElementRef;
@@ -15,13 +15,17 @@ export class InputFormComponent {
   @ViewChild('name') name:ElementRef;
   
   meal= {};
-  meal_name = "";
   ingredients_array = []
   apparatus_array = []
+  meals_array = [];
 
   constructor(private mealServices: MealServices) {}
 
-onApparatusAdd () {
+  ngOnInit(): void {
+    this.meals_array = this.mealServices.meals
+  }
+
+  onApparatusAdd () {
   if (this.apparatus.nativeElement.value.length != 0) {
     this.apparatus_array.push(this.apparatus.nativeElement.value);
     this.apparatus.nativeElement.value = "";
@@ -36,14 +40,27 @@ onIngredientsAdd () {
 }
 
 onSubmit() {
+
   if (this.name.nativeElement.value.length != 0) {
-    this.meal_name = this.name.nativeElement.value;
-    this.meal = {name: this.meal_name,
+
+    // Adding the form to the meal variable
+    this.meal = {name: this.name.nativeElement.value,
     ingredients: this.ingredients_array,
-    apparatus: this.apparatus_array}
-    console.log(this.meal)
+    apparatus: this.apparatus_array,
+    description:""}
+
+    // Clearing the local variables
+    this.name.nativeElement.value = ""
+    this.ingredients_array = [];
+    this.apparatus_array = [];
+
+
+    // Adding the meal to the Services class by pushing it to the local meals_array variable (pass by refference)
+    this.meals_array.push(this.meal)
   } else
+
   alert('enter a name')
+
 }
 
 }
