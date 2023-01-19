@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MealServices } from '../meals.services';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-input-form',
@@ -19,7 +20,9 @@ export class InputFormComponent implements OnInit {
   apparatus_array = []
   meals_array = [];
 
-  constructor(private mealServices: MealServices) {}
+  constructor(
+    private http:HttpClient,
+    private mealServices: MealServices) {}
 
   ngOnInit(): void {
     this.meals_array = this.mealServices.meals
@@ -56,6 +59,13 @@ onSubmit() {
 
 
     // Adding the meal to the Services class by pushing it to the local meals_array variable (pass by refference)
+    this.http.post('https://meals-94a70-default-rtdb.firebaseio.com/meals.json',this.meal).subscribe(
+      ()=> {
+        console.log(this.meal)
+      }
+    )
+
+
     this.meals_array.push(this.meal)
   } else
 
